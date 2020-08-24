@@ -73,6 +73,17 @@ IntIndColl<T>::IntIndColl(const IntIndColl& src)
     collection[i] = src.collection[i];
 }
 
+template <class T>
+int ListDataCmp(const T& data1, const T& data2)
+ {
+    int result = 1;
+    if (data1 < data2)
+    result = -1;
+    else if (data1 == data2)
+    result = 0;
+    return result;
+ }
+
 
 int main()
 {

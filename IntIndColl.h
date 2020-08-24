@@ -26,23 +26,14 @@ class IntIndColl
 
     IntIndColl(const IntIndColl& src);
 
+    void insert();
+
   private:
     // pointer to the array itself
     T *collection;
 
     // total size of array
     int size;
-
-    struct node;
-    typedef node *nodePtr;
-    
-    struct node
-    {
-        int data;
-        nodePtr next;
-    };
-
-    nodePtr head;
 };
 
 #endif 
