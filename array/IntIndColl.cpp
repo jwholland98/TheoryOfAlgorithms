@@ -85,7 +85,7 @@ int ListDataCmp(const T& data1, const T& data2)
  }
 
 
-int main()
+/*int main()
 {
     int isize, howmany, i, data;
     // specify size of array needed
@@ -107,4 +107,4 @@ int main()
     cin >> i;
     data = intarr.Retrieve(i);
     cout << "arr[" << i << "] = " << data << endl;
-}
+}*/
