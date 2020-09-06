@@ -4,11 +4,13 @@
 
 using namespace std;
 
+//Insertion Sort:
+//A=array; n is size of array
 void insertSort(IntIndColl<int> &A, int n){
-    for (int i=1;i<=n-1;i++){
+    for (int i=1;i<=n-1;i++){           //iterates through each element in array
         int v = A[i];
         int j = i - 1;
-        while (j>=0 && A[j]>v){
+        while (j>=0 && A[j]>v){         //checks for correct position and places it there
             A[j+1] = A[j];
             j--;
         }
@@ -16,11 +18,12 @@ void insertSort(IntIndColl<int> &A, int n){
     }
 }
 
+//merge arrays B and C into A; n is size of A
 void merge(IntIndColl<int> &B, IntIndColl<int> &C, IntIndColl<int> &A, int n){
-    int i = 0, j = 0, k = 0;
-    int p = (n/2);
-    int q = n-(n/2);
-    while (i < p && j < q){
+    int i = 0, j = 0, k = 0;            //iterators
+    int p = (n/2);                      //size of B
+    int q = n-(n/2);                    //size of C
+    while (i < p && j < q){             //checks for smallest num until either iterator is equal to the arrays size
         if (B[i] <= C[j]){
             A[k] = B[i];
             i++;
@@ -32,26 +35,28 @@ void merge(IntIndColl<int> &B, IntIndColl<int> &C, IntIndColl<int> &A, int n){
         k++;
     }
     if (i == p){
-        for (int x=k;x<(p+q);x++)
-            A[x] = C[j+x-k];
+        for (int x=k;x<(p+q);x++)       //copy A[k..p+q-1] to C[j..q-1]
+            A[x] = C[j+x-k];            //copies from j+iterator minus the offset of k
     }
     else{
-        for (int x=k;x<(p+q);x++)
-            A[x] = B[i+x-k];
+        for (int x=k;x<(p+q);x++)       //copy A[k..p+q-1] to B[i..p-1]
+            A[x] = B[i+x-k];            //copies from i+iterator minus the offset of k
     }
 }
 
+//Merge Sort:
+//A=array; n is size of array
 void mergeSort(IntIndColl<int> &A, int n){
     if(n>1){
-        IntIndColl<int> B(n/2);
-        IntIndColl<int> C(n-(n/2));
+        IntIndColl<int> B(n/2);         //create array for first half if A
+        IntIndColl<int> C(n-(n/2));     //create array for second half if A
         for (int i=0;i<(n/2);i++)       //copy first half of A into B
             B[i] = A[i];
         for (int i=0;i<n-(n/2);i++)     //copy second half of A into C
             C[i] = A[(n/2)+i];
-        mergeSort(B, (n/2));
+        mergeSort(B, (n/2));            //recursive call to further split up arrays
         mergeSort(C, (n-(n/2)));
-        merge(B, C, A, n);
+        merge(B, C, A, n);              //merge arrays together after they have been separated out
     }
 }
 
