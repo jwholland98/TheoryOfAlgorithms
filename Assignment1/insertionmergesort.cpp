@@ -6,7 +6,7 @@ using namespace std;
 
 //Insertion Sort:
 //A=array; n is size of array
-void insertSort(IntIndColl<int> &A, int n){
+void insertSort(IntIndColl<long long int> &A, int n){
     for (int i=1;i<=n-1;i++){           //iterates through each element in array
         int v = A[i];
         int j = i - 1;
@@ -19,7 +19,7 @@ void insertSort(IntIndColl<int> &A, int n){
 }
 
 //merge arrays B and C into A; n is size of A
-void merge(IntIndColl<int> &B, IntIndColl<int> &C, IntIndColl<int> &A, int n){
+void merge(IntIndColl<long long int> &B, IntIndColl<long long int> &C, IntIndColl<long long int> &A, int n){
     int i = 0, j = 0, k = 0;            //iterators
     int p = (n/2);                      //size of B
     int q = n-(n/2);                    //size of C
@@ -46,10 +46,10 @@ void merge(IntIndColl<int> &B, IntIndColl<int> &C, IntIndColl<int> &A, int n){
 
 //Merge Sort:
 //A=array; n is size of array
-void mergeSort(IntIndColl<int> &A, int n){
+void mergeSort(IntIndColl<long long int> &A, int n){
     if(n>1){
-        IntIndColl<int> B(n/2);         //create array for first half if A
-        IntIndColl<int> C(n-(n/2));     //create array for second half if A
+        IntIndColl<long long int> B(n/2);         //create array for first half if A
+        IntIndColl<long long int> C(n-(n/2));     //create array for second half if A
         for (int i=0;i<(n/2);i++)       //copy first half of A into B
             B[i] = A[i];
         for (int i=0;i<n-(n/2);i++)     //copy second half of A into C
@@ -60,22 +60,28 @@ void mergeSort(IntIndColl<int> &A, int n){
     }
 }
 
-int main()
+int main(int argc, char **argv)
 {
+    if (argc < 3){
+        cerr << "Usage: ./imsort <size of array> <upper bound>" << endl;
+        exit(0);
+    }
     int size, ubound;
     srand(700445452);                           //set seed for rng
-    cout << "Size of array? ";
-    cin >> size;                                //get size of array
-    cout << "Upper bound? ";
-    cin >> ubound;                              //set upper bound
-    IntIndColl<int> arr(size);
+    size = int(strtol(argv[1], nullptr, 0));         //set size of array
+    ubound = int(strtol(argv[2], nullptr, 0));       //set upper bound
+
+    IntIndColl<long long int> arr(size);
     for (int i = 0; i < size; i++)              //input random number based on seed into the array
     {
-        arr[i] = rand() % ubound;
+        if (ubound > 2147483647)                    //set upper limit of rand to long long int if larger than int
+            arr[i] = (rand()*4,294,967,298) % ubound;
+        else
+            arr[i] = rand() % ubound;
         cout << "A[" << i << "] = " << arr[i] << endl;        //output numbers contained in array
     }
     cout << "--------------------------" << endl;
-    IntIndColl<int> arr2(size);                 //create new array for second sort
+    IntIndColl<long long int> arr2(size);                 //create new array for second sort
     arr2.Copy(arr);                             //copy into new array
     insertSort(arr, size);                      //run insertion sort
     mergeSort(arr2, size);                      //run merge sort

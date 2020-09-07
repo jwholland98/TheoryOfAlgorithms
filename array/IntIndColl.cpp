@@ -5,12 +5,12 @@
 using namespace std;
 
 template <class T>
-IntIndColl<T>::IntIndColl(int sz)
+IntIndColl<T>::IntIndColl(long long int sz)
 // note no default argument value here
 // has to be in one place or the other
 {
     size = sz; // should check for +ve
-    collection = new int[sz];
+    collection = new long long int[sz];
 }
 
 template <class T>
@@ -54,7 +54,7 @@ void IntIndColl<T>::Copy(const IntIndColl& source)
 }
 
 template <class T>
-int& IntIndColl<T>::operator[](int index)
+T& IntIndColl<T>::operator[](int index)
 {
     if ((index < 0) || (index > size-1))
     {

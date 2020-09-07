@@ -7,7 +7,7 @@ class IntIndColl
  public:
     // constructor - use default argument
     // so only one needed
-    IntIndColl(int sz = 100);
+    IntIndColl(long long int sz = 100);
 
     // destructor
     ~IntIndColl();
@@ -22,7 +22,7 @@ class IntIndColl
     void Copy(const IntIndColl&);
 
     //overload []
-    int& operator[](int index);
+    T& operator[](int index);
 
     IntIndColl(const IntIndColl& src);
 
