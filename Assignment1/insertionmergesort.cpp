@@ -8,10 +8,11 @@ using namespace std::chrono; //code for chrono taken from https://www.geeksforge
 
 //Insertion Sort:
 //A=array; n is size of array
-void insertSort(IntIndColl<int> &A, int n){
+template <class T>
+void insertSort(IntIndColl<T> &A, int n){
     for (int i=1;i<=n-1;i++){           //iterates through each element in array
-        int v = A[i];
-        int j = i - 1;
+        T v = A[i];
+        T j = i - 1;
         while (j>=0 && A[j]>v){         //checks for correct position and places it there
             A[j+1] = A[j];
             j--;
@@ -21,10 +22,11 @@ void insertSort(IntIndColl<int> &A, int n){
 }
 
 //merge arrays B and C into A; n is size of A
-void merge(IntIndColl<int> &B, IntIndColl<int> &C, IntIndColl<int> &A, int n){
-    int i = 0, j = 0, k = 0;            //iterators
-    int p = (n/2);                      //size of B
-    int q = n-(n/2);                    //size of C
+template <class T>
+void merge(IntIndColl<T> &B, IntIndColl<T> &C, IntIndColl<T> &A, int n){
+    T i = 0, j = 0, k = 0;            //iterators
+    T p = (n/2);                      //size of B
+    T q = n-(n/2);                    //size of C
     while (i < p && j < q){             //checks for smallest num until either iterator is equal to the arrays size
         if (B[i] <= C[j]){
             A[k] = B[i];
@@ -48,10 +50,11 @@ void merge(IntIndColl<int> &B, IntIndColl<int> &C, IntIndColl<int> &A, int n){
 
 //Merge Sort:
 //A=array; n is size of array
-void mergeSort(IntIndColl<int> &A, int n){
+template <class T>
+void mergeSort(IntIndColl<T> &A, int n){
     if(n>1){
-        IntIndColl<int> B(n/2);         //create array for first half if A
-        IntIndColl<int> C(n-(n/2));     //create array for second half if A
+        IntIndColl<T> B(n/2);         //create array for first half if A
+        IntIndColl<T> C(n-(n/2));     //create array for second half if A
         for (int i=0;i<(n/2);i++)       //copy first half of A into B
             B[i] = A[i];
         for (int i=0;i<n-(n/2);i++)     //copy second half of A into C
@@ -59,62 +62,6 @@ void mergeSort(IntIndColl<int> &A, int n){
         mergeSort(B, (n/2));            //recursive call to further split up arrays
         mergeSort(C, (n-(n/2)));
         merge(B, C, A, n);              //merge arrays together after they have been separated out
-    }
-}
-
-//Insertion Sort:
-//A=array; n is size of array
-void lliinsertSort(IntIndColl<long long int> &A, int n){
-    for (int i=1;i<=n-1;i++){           //iterates through each element in array
-        long long int v = A[i];
-        long long int j = i - 1;
-        while (j>=0 && A[j]>v){         //checks for correct position and places it there
-            A[j+1] = A[j];
-            j--;
-        }
-        A[j+1] = v;
-    }
-}
-
-//merge arrays B and C into A; n is size of A
-void llimerge(IntIndColl<long long int> &B, IntIndColl<long long int> &C, IntIndColl<long long int> &A, int n){
-    int i = 0, j = 0, k = 0;            //iterators
-    int p = (n/2);                      //size of B
-    int q = n-(n/2);                    //size of C
-    while (i < p && j < q){             //checks for smallest num until either iterator is equal to the arrays size
-        if (B[i] <= C[j]){
-            A[k] = B[i];
-            i++;
-        }
-        else{
-            A[k] = C[j];
-            j++;
-        }
-        k++;
-    }
-    if (i == p){
-        for (int x=k;x<(p+q);x++)       //copy A[k..p+q-1] to C[j..q-1]
-            A[x] = C[j+x-k];            //copies from j+iterator minus the offset of k
-    }
-    else{
-        for (int x=k;x<(p+q);x++)       //copy A[k..p+q-1] to B[i..p-1]
-            A[x] = B[i+x-k];            //copies from i+iterator minus the offset of k
-    }
-}
-
-//Merge Sort:
-//A=array; n is size of array
-void llimergeSort(IntIndColl<long long int> &A, int n){
-    if(n>1){
-        IntIndColl<long long int> B(n/2);         //create array for first half if A
-        IntIndColl<long long int> C(n-(n/2));     //create array for second half if A
-        for (int i=0;i<(n/2);i++)       //copy first half of A into B
-            B[i] = A[i];
-        for (int i=0;i<n-(n/2);i++)     //copy second half of A into C
-            C[i] = A[(n/2)+i];
-        llimergeSort(B, (n/2));            //recursive call to further split up arrays
-        llimergeSort(C, (n-(n/2)));
-        llimerge(B, C, A, n);              //merge arrays together after they have been separated out
     }
 }
 
@@ -170,20 +117,20 @@ int main(int argc, char **argv)
 
     cout << "Starting Insertion Sort with long long ints" << endl;
     start = high_resolution_clock::now();
-    lliinsertSort(lliarr, size);                //run insertion sort
+    insertSort(lliarr, size);                //run insertion sort
     stop = high_resolution_clock::now();
     duration = duration_cast<microseconds>(stop - start);
     cout << "Long Long Int Insertion Sort Time: " << duration.count() << " microseconds" << endl << endl;
 
     cout << "Starting Merge Sort with long long ints" << endl;
     start = high_resolution_clock::now();
-    llimergeSort(lliarr2, size);                //run merge sort
+    mergeSort(lliarr2, size);                //run merge sort
     stop = high_resolution_clock::now();
     duration = duration_cast<microseconds>(stop - start);
     cout << "Long Long Int Merge Sort Time: " << duration.count() << " microseconds" << endl << endl;
 
     //[DEBUGGING]
-    /*cout << "Insertion Sort:" << endl;
+    cout << "Insertion Sort:" << endl;
     for (int i = 0; i < size; i++)            //output numbers to prove it is sorted
     {
         cout << arr[i] << endl;
@@ -202,6 +149,6 @@ int main(int argc, char **argv)
     for (int i = 0; i < size; i++)              //output numbers to prove it is sorted
     {
         cout << lliarr2[i] << endl;
-    }*/
+    }
     return 0;
 }
