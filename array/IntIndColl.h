@@ -7,7 +7,7 @@ class IntIndColl
  public:
     // constructor - use default argument
     // so only one needed
-    IntIndColl(long long int sz = 100);
+    IntIndColl(T sz = 100);
 
     // destructor
     ~IntIndColl();

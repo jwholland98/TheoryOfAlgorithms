@@ -5,12 +5,12 @@
 using namespace std;
 
 template <class T>
-IntIndColl<T>::IntIndColl(long long int sz)
+IntIndColl<T>::IntIndColl(T sz)
 // note no default argument value here
 // has to be in one place or the other
 {
     size = sz; // should check for +ve
-    collection = new long long int[sz];
+    collection = new T[sz];
 }
 
 template <class T>
