@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
-#include "../array/IntIndColl.cpp"
+#include "IntIndColl.cpp"
 
 using namespace std;
 

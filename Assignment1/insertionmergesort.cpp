@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <chrono>
-#include "../array/IntIndColl.cpp"
+#include "IntIndColl.cpp"
 
 using namespace std;
 using namespace std::chrono; //code for chrono taken from https://www.geeksforgeeks.org/measure-execution-time-function-cpp/
@@ -99,16 +99,16 @@ int oddeven()
 
 int main(int argc, char **argv)
 {
-    if (argc < 2)
+    if (argc < 2 || argc == 3)
     {
-        cerr << "Usage: ./imsort <size of array> <upper bound for int> <upper bound for long long int>" << endl;
+        cerr << "Usage: ./imsort <size of array> <upper bound for int> <upper bound for long long int>\nBoth upper Bounds have a default if not included" << endl;
         exit(0);
     }
     int size, ubound;
     long long int lliubound;
     srand(700445452);     //set seed for rng
     size = atoi(argv[1]); //set size of array
-    if (argc > 2)
+    if (argc > 3)
     { //set upper bound
         ubound = atoi(argv[2]);
         lliubound = strtoll((argv[3]), nullptr, 0);
@@ -126,8 +126,6 @@ int main(int argc, char **argv)
     {
         arr[i] = (rand() * oddeven()) % ubound;
         lliarr[i] = (rand() * 4294967298 * oddeven()) % lliubound; //set upper limit of rand to long long int
-        /*cout << "A[" << i << "] = " << arr[i] << endl;        //output numbers contained in array
-        cout << "Along[" << i << "] = " << lliarr[i] << endl;*/
     }
 
     IntIndColl<int> arr2(size); //create new array for second sort
@@ -166,27 +164,5 @@ int main(int argc, char **argv)
     duration = duration_cast<microseconds>(stop - start);
     cout << "Long Long Int Merge Sort Time: " << duration.count() << " microseconds" << endl
          << endl;
-
-    //[DEBUGGING]
-    /*cout << "Insertion Sort:" << endl;
-    for (int i = 0; i < size; i++)            //output numbers to prove it is sorted
-    {
-        cout << arr[i] << endl;
-    }
-    cout << "Merge Sort:" << endl;
-    for (int i = 0; i < size; i++)              //output numbers to prove it is sorted
-    {
-        cout << arr2[i] << endl;
-    }
-    cout << "Insertion Sort long:" << endl;
-    for (int i = 0; i < size; i++)            //output numbers to prove it is sorted
-    {
-        cout << lliarr[i] << endl;
-    }
-    cout << "Merge Sort long:" << endl;
-    for (int i = 0; i < size; i++)              //output numbers to prove it is sorted
-    {
-        cout << lliarr2[i] << endl;
-    }*/
     return 0;
 }
