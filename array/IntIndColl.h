@@ -1,3 +1,12 @@
+/********************************************************************
+* Filename: IntIndColl.h                                            *
+* Assignment No: 1                                                  *
+* File Description: Implements custom array                         *
+*   based on code given by Sherrine Antoun                          *
+*                                                                   *
+* Date Last Modified: 9/11/2020                                     *
+********************************************************************/
+
 #ifndef INTINDCOLL_H_
 #define INTINDCOLL_H_
 

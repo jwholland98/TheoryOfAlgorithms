@@ -1,3 +1,12 @@
+/********************************************************************
+* Filename: insertionmergesort.cpp                                  *
+* Assignment No: 1                                                  *
+* File Description: Compares times for insertion and merge sorts    *
+*   for integers long long integers                                 *
+*                                                                   *
+* Date Last Modified: 9/11/2020                                     *
+********************************************************************/
+
 #include <iostream>
 #include <stdlib.h>
 #include <chrono>
@@ -97,27 +106,23 @@ int oddeven()
         return -1;
 }
 
-int main(int argc, char **argv)
+int main()
 {
-    if (argc < 2 || argc == 3)
-    {
-        cerr << "Usage: ./imsort <size of array> <upper bound for int> <upper bound for long long int>\nBoth upper Bounds have a default if not included" << endl;
-        exit(0);
-    }
     int size, ubound;
     long long int lliubound;
     srand(700445452);     //set seed for rng
-    size = atoi(argv[1]); //set size of array
-    if (argc > 3)
-    { //set upper bound
-        ubound = atoi(argv[2]);
-        lliubound = strtoll((argv[3]), nullptr, 0);
-    }
-    else
-    {
+    cout << "How many number do you want to sort?" << endl;
+    cin >> size; //set size of array
+
+    cout << "Upper bound for integer? (enter 0 for default of 2147483647)" << endl;
+    cin >> ubound;
+    if (ubound == 0)
         ubound = 2147483647;
+
+    cout << "Upper bound for long long integer? (enter 0 for default of 9223372036854775807)" << endl;
+    cin >> lliubound;
+    if (lliubound == 0)
         lliubound = 9223372036854775807;
-    }
 
     IntIndColl<int> arr(size);
     IntIndColl<long long int> lliarr(size);

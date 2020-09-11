@@ -1,3 +1,12 @@
+/********************************************************************
+* Filename: IntIndColl.cpp                                          *
+* Assignment No: 1                                                  *
+* File Description: Implements custom array                         *
+*   based on code given by Sherrine Antoun                          *
+*                                                                   *
+* Date Last Modified: 9/11/2020                                     *
+********************************************************************/
+
 #include "IntIndColl.h"
 #include <cstdlib>
 #include <iostream>

@@ -1,3 +1,12 @@
+/********************************************************************
+* Filename: linearSearch.cpp                                        *
+* Assignment No: 1                                                  *
+* File Description: Implements linear sort and double sided         *
+*   linear sort                                                     *
+*                                                                   *
+* Date Last Modified: 9/11/2020                                     *
+********************************************************************/
+
 #include <iostream>
 #include <stdlib.h>
 #include "IntIndColl.cpp"
@@ -6,7 +15,7 @@ using namespace std;
 
 //Linear search:
 //A=array; size = size of array; k = number being searched for
-bool linSort(IntIndColl<int> A, int size, int k)
+bool linSearch(IntIndColl<int> A, int size, int k)
 {
     int i = 0;
     bool found = false;
@@ -23,7 +32,7 @@ bool linSort(IntIndColl<int> A, int size, int k)
 
 //Two way Linear search:
 //A=array; size is size of array; k is number being searched for
-bool linSort2(IntIndColl<int> A, int size, int k)
+bool linSearch2(IntIndColl<int> A, int size, int k)
 {
     int i = 0;
     bool found = false;
@@ -61,7 +70,7 @@ int main()
     arr2.Copy(arr); //copy into new array
 
     //output result of search; currently just searches for 1
-    cout << boolalpha << linSort(arr, size, 1) << endl;
-    cout << boolalpha << linSort2(arr2, size, 1) << endl;
+    cout << boolalpha << linSearch(arr, size, 1) << endl;
+    cout << boolalpha << linSearch(arr2, size, 1) << endl;
     return 0;
 }
