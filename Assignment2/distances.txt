@@ -11,7 +11,6 @@ Wisconsin Dells, WI[4363,8977]2521
 1149 1817 481 595
 Winston-Salem, NC[3610,8025]131885
 927 729 2742 1289 494
-* End of file "distances.txt"
 Winnipeg, MB[4988,9715]564473
 1611 686 1833 1446 550 1279
 Winchester, VA[3919,7816]20217

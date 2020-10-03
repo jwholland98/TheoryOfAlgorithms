@@ -52,12 +52,5 @@ struct Graph{
             edges.Insert(edge);
             numEdges++;
       }
-      //struct Vertex;
-
-      /*struct Vertex{
-          string name;
-          int numEdges;
-          LinkedList<Edge> edges;
-      };*/
 };
 

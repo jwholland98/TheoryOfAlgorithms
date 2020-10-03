@@ -20,7 +20,7 @@ Student Name: Jesse Holland UID: 700445452 Date: October 1, 2020
 
 using namespace std;
 
-int ListDataCmp(int data1, int data2)//need to change to deside based on edge weight
+int ListDataCmp(int data1, int data2)
 {
     int result = 1;
     if (data1 < data2)
@@ -130,12 +130,6 @@ void LinkedList<T>::InsertFront(const T& newdata)
 }
 
 template<class T>
-bool LinkedList<T>::Locate(const T& locdata, T& NOTSURE)
-{
-    //complete later
-}
-
-template<class T>
 void LinkedList<T>::Delete(const T& deldata){
     nodePtr curr, prev;
     curr = head->next;
@@ -185,23 +179,3 @@ bool LinkedList<T>::More()
 {
      return (current != 0);
 } 
-
-/*int main()
-{
-    LinkedList<int> list;
-    int data;
-
-    // set up the list
-    list.Insert(1);
-    list.Insert(2);
-    list.Delete(2);
-
-    list.SetIterator();
-    while(list.More())
-    {
-        data = list.Next();
-        // process data
-        cout << data << endl;
-    }
-    return 0;
-}*/

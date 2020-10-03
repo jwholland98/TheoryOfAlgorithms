@@ -20,6 +20,7 @@ Student Name: Jesse Holland UID: 700445452 Date: October 1, 2020
 #include <iostream>
 #include <fstream>
 #include "graph.cpp"
+#include "array.cpp"
 
 using namespace std;
 
@@ -28,35 +29,36 @@ struct subset{
     int rank;
 };
 
-int find(subset subsets[], int i){
+int find(Array<subset> &subsets, int i){
     if(subsets[i].parent != i)
         subsets[i].parent = find(subsets, subsets[i].parent);
     
     return subsets[i].parent;
 }
 
-void Union(subset subsets[], int x, int y){
+void Union(Array<subset> &subsets, int x, int y){
     int xroot = find(subsets, x);
     int yroot = find(subsets, y);
-
-    if (subsets[xroot].rank < subsets[yroot].rank)
+    
+    if (subsets[xroot].rank < subsets[yroot].rank){
         subsets[xroot].parent = yroot;
-    else if (subsets[xroot].rank > subsets[yroot].rank)
+    }
+    else if (subsets[xroot].rank > subsets[yroot].rank){
         subsets[yroot].parent = xroot;
+    }
     else{
         subsets[yroot].parent = xroot;
         subsets[xroot].rank++;
     }
 }
 
-void Kruskal(Graph graph){
+LinkedList<Edge> Kruskal(Graph graph, bool output){
     int V = graph.numVertices;
     LinkedList<Edge> result;
-    int e = 0, i = 0;
+    int e = 0, i = 0, totaldist = 0;
 
-    subset *subsets = new subset[(V * sizeof(subset))];
-    
-    for (int v=0;v < V; ++v){//try v++ later, just out of curiosity
+    Array<subset> subsets(V);
+    for (int v=0;v < V; v++){
         subsets[v].parent = v;
         subsets[v].rank = 0;
     }
@@ -64,53 +66,93 @@ void Kruskal(Graph graph){
     graph.edges.SetIterator(true);
     while (e < V-1 && i < graph.numEdges){
         Edge next_edge = graph.edges.Next();
+
         int x = find(subsets, next_edge.src.nodeNum);
         int y = find(subsets, next_edge.dst.nodeNum);
 
         if (x != y){
             result.InsertBack(next_edge);
+            totaldist+=next_edge.weight;
             e++;
             Union(subsets, x, y);
         }
     }
     result.SetIterator(true);
-    for (i = 0;i<e;++i){//lol, same as above
-        Edge edge = result.Next();
-        cout << edge.src.name << " to " << edge.dst.name << " :: distance = " << edge.weight << endl;;
+    if (output){
+        for (i = 0;i<e;i++){
+            Edge edge = result.Next();
+            cout << edge.src.name << " to " << edge.dst.name << " :: distance = " << edge.weight << endl;;
+        }
+        cout << "Total Distance: " << totaldist << endl;
     }
-    delete subsets;
+    return result;
 }
 
-int main(int argc, char **argv){//need to change to get state as well as city name
-    if (argc<2 || argc > 4)
-        cerr << "Usage error" << endl;
+//builds graph from file specified; returns graph
+Graph builtGraph(string fname){
     Graph graph;
     ifstream inf;
-    inf.open(argv[1]);
+    inf.open(fname);
     string city, junk;
     int distance;
     LinkedList<string> cities;
-    inf >> junk >> junk >> junk >> junk >> junk >> junk >> junk >> junk >> junk;//get and discard the 2 comments at top of txt file
-    while(inf >> city){//gets city
-        if(city == "*")
+
+    //get and discard the 2 comments at top of txt file
+    getline(inf, junk);
+    getline(inf, junk);
+    while(getline(inf, city, '[')){//gets city
+        if(city[0] == '*')//breaks from loop if comment is found
             break;
-        while(city.back() != ','){//handles spaces in names
-            string tmp;
-            inf >> tmp;
-            city = city + " " + tmp;
-        }
-        inf >> junk; // gets and discards junk after city name
-        city.pop_back();//removes comma from city name
+        getline(inf, junk);
         cities.SetIterator(true);
         for(int i=graph.numVertices;i>0;i--){//builds edges for each city
             inf >> distance;
             string dstCity = cities.Next();
             graph.newEdge(distance, city, graph.numVertices, dstCity, i-1);
         }
-        cities.InsertFront(city);
+        inf >> ws;//remove extra whitespace
+        cities.InsertFront(city);//add city to list of cities
         graph.numVertices++;
     }
-    Kruskal(graph);
+    return graph;
+}
+
+int main(int argc, char **argv){//make sure to test on ubuntu before submitting
+    if (argc < 2)
+        cerr << "Usage error" << endl;
+    string src, dst;
+    if (argc > 2){//if argc is greater than 2, parse input for journey
+        int i = 2;
+        string tmpsrc(argv[i]);
+        src = tmpsrc;
+        while (src.back() != ','){//check until last char is comma, then add one more argument to source city
+            src += ' ';
+            src += argv[++i];
+        }
+        src += ' ';
+        src += argv[++i];
+
+        //repeat for destination city
+        string tmpdst(argv[++i]);
+        dst = tmpdst;
+        while (dst.back() != ','){
+            dst += ' ';
+            dst += argv[++i];
+        }
+        dst += ' ';
+        dst += argv[++i];
+    }
+    Graph graph = builtGraph(argv[1]);
+
+    if(argc == 2)//if argc is 2, get mst and output it
+        Kruskal(graph, true);
+    else{
+        LinkedList<Edge> MST = Kruskal(graph, false);
+        cout << src << endl << dst << endl;
+        //dijkstra
+    }
+    return 0;
+}
 
     //[DEBUG]
     /*graph.edges.SetIterator(true);
@@ -123,5 +165,3 @@ int main(int argc, char **argv){//need to change to get state as well as city na
         cout << "   DestNum: " << edge.dst.nodeNum << endl;
         cout << "   Distance: " << edge.weight << endl;
     }*/
-    return 0;
-}

@@ -37,7 +37,6 @@ class LinkedList
     void Insert(const T&);
     void InsertBack(const T&);
     void InsertFront(const T&);
-    bool Locate(const T&, T&);
     void Delete(const T&);
     // all using comparison
 
