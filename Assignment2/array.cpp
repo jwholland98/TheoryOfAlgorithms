@@ -1,7 +1,8 @@
 /*******************************************************************************************
  Filename: array.cpp                                  
  Assignment No: 2                                                  
- File Description: Contains array structure                                
+ File Description: Contains array structure. Code based on reference given by
+ Dr. Sherine M. Antoun during first week's course material
                                                                   
  Date Last Modified: 10/1/2020
 
@@ -12,7 +13,7 @@ website.
 http://www.coloradomesa.edu/student-services/documents
 Submissions that do not include the above academic integrity statements will not be
 considered.
-Student Name: Jesse Holland UID: 700445452 Date: October 1, 2020
+Student Name: Jesse Holland UID: 700445452 Date: October 3, 2020
 *******************************************************************************************/
 
 #include "array.h"
@@ -87,6 +88,11 @@ Array<T>::Array(const Array& src)
     for (int i=0;i<src.size;i++)
     collection[i] = src.collection[i];
 }
+
+template <class T>
+int Array<T>::getSize(){
+     return size;
+ }
 
 template <class T>
 int ListDataCmp(const T& data1, const T& data2)

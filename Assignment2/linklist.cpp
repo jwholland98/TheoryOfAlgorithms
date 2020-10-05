@@ -1,7 +1,8 @@
 /*******************************************************************************************
  Filename: linklist.cpp                                  
  Assignment No: 2                                                  
- File Description: Contains Linked List Data Structure                                 
+ File Description: Contains Linked List Data Structure. Code based on reference given by
+ Dr. Sherine M. Antoun during first week's course material, although modified heavily
                                                                   
  Date Last Modified: 10/1/2020
 
@@ -12,7 +13,7 @@ website.
 http://www.coloradomesa.edu/student-services/documents
 Submissions that do not include the above academic integrity statements will not be
 considered.
-Student Name: Jesse Holland UID: 700445452 Date: October 1, 2020
+Student Name: Jesse Holland UID: 700445452 Date: October 3, 2020
 *******************************************************************************************/
 
 #include <iostream>
@@ -33,6 +34,7 @@ int ListDataCmp(int data1, int data2)
 template<class T>
 LinkedList<T>::LinkedList()
 {
+    size = 0;
     current = 0;
     head = new node;
     tail = new node;
@@ -43,18 +45,10 @@ LinkedList<T>::LinkedList()
 }
 
 template<class T>
-LinkedList<T>::~LinkedList()//deallocate list
+LinkedList<T>::~LinkedList()//deallocate head and tail
 {
-    nodePtr curr, next;
-    curr = head;
-    next = head->next;
-    while(next!=tail){
-        delete curr;
-        curr = next;
-        next = next->next;
-    }
-    delete curr;
-    delete next;
+    delete head;
+    delete tail;
 }
 
 template<class T>
@@ -64,9 +58,15 @@ bool LinkedList<T>::IsEmpty()
 }
 
 template<class T>
-T LinkedList<T>::RemoveFromHead()
+T LinkedList<T>::PopFromTail()
 {
-    //complete later
+    nodePtr curr = tail->prev;
+    T data = curr->data;
+    curr->prev->next = tail;
+    tail->prev = curr-> prev;
+    delete curr;
+    size--;
+    return data;
 }
 
 template<class T>
@@ -87,6 +87,7 @@ void LinkedList<T>::Insert(const T& newdata)
     prev->next=newnode;
     newnode->prev=prev;
     curr->prev=newnode;
+    size++;
 }
 
 template<class T>
@@ -107,6 +108,7 @@ void LinkedList<T>::InsertBack(const T& newdata)
     prev->next=newnode;
     newnode->prev=prev;
     curr->prev=newnode;
+    size++;
 }
 
 template<class T>
@@ -127,6 +129,7 @@ void LinkedList<T>::InsertFront(const T& newdata)
     next->prev=newnode;
     newnode->next=next;
     curr->next=newnode;
+    size++;
 }
 
 template<class T>
@@ -146,6 +149,7 @@ void LinkedList<T>::Delete(const T& deldata){
     }
     prev->next=curr->next;
     curr->next->prev=prev;
+    size--;
     delete curr;
 }
 
@@ -157,6 +161,11 @@ void LinkedList<T>::SetIterator(bool front)
     else
         current = tail->prev;
 } 
+
+template<class T>
+int LinkedList<T>::getSize(){
+    return size;
+}
 
 template<class T>
 T LinkedList<T>::Next()

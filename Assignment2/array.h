@@ -1,7 +1,8 @@
 /*******************************************************************************************
  Filename: array.cpp                                  
  Assignment No: 2                                                  
- File Description: Contains array header info                               
+ File Description: Contains array header info. Code based on reference given by
+ Dr. Sherine M. Antoun during first week's course material
                                                                   
  Date Last Modified: 10/1/2020
 
@@ -12,7 +13,7 @@ website.
 http://www.coloradomesa.edu/student-services/documents
 Submissions that do not include the above academic integrity statements will not be
 considered.
-Student Name: Jesse Holland UID: 700445452 Date: October 1, 2020
+Student Name: Jesse Holland UID: 700445452 Date: October 3, 2020
 *******************************************************************************************/
 
 #ifndef ARRAY_H_
@@ -42,6 +43,8 @@ class Array
     T& operator[](int index);
 
     Array(const Array& src);
+
+    int getSize();
 
     void insert();
 

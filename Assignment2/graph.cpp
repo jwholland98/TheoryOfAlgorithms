@@ -12,7 +12,7 @@ website.
 http://www.coloradomesa.edu/student-services/documents
 Submissions that do not include the above academic integrity statements will not be
 considered.
-Student Name: Jesse Holland UID: 700445452 Date: October 1, 2020
+Student Name: Jesse Holland UID: 700445452 Date: October 3, 2020
 *******************************************************************************************/
 
 #include <iostream>
@@ -33,7 +33,6 @@ struct Edge{
 
 struct Graph{
     public:
-      // the following are as before
       int numVertices;
       int numEdges;
       LinkedList<Edge> edges;
@@ -41,7 +40,8 @@ struct Graph{
             numVertices = 0;
             numEdges = 0;
       }
-
+      
+      //add new edge to graph
       void newEdge(int weight, string srcName, int srcNum, string dstName, int dstNum){
             Edge edge;
             edge.weight = weight;

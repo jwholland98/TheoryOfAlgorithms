@@ -1,7 +1,8 @@
 /*******************************************************************************************
  Filename: linklist.h                                  
  Assignment No: 2                                                  
- File Description: Contains Linked List Header info                                 
+ File Description: Contains Linked List Header info. Code based on reference given by
+ Dr. Sherine M. Antoun during first week's course material, although modified heavily
                                                                   
  Date Last Modified: 10/1/2020
 
@@ -12,7 +13,7 @@ website.
 http://www.coloradomesa.edu/student-services/documents
 Submissions that do not include the above academic integrity statements will not be
 considered.
-Student Name: Jesse Holland UID: 700445452 Date: October 1, 2020
+Student Name: Jesse Holland UID: 700445452 Date: October 3, 2020
 *******************************************************************************************/
 
 #ifndef LINKLIST_H_
@@ -31,7 +32,7 @@ class LinkedList
 
     bool IsEmpty();
 
-    T RemoveFromHead();
+    T PopFromTail();
     // previous retrieve function
 
     void Insert(const T&);
@@ -41,6 +42,7 @@ class LinkedList
     // all using comparison
 
     void SetIterator(bool);
+    int getSize();
 
     T Next();
     T Prev();
@@ -62,5 +64,6 @@ class LinkedList
     nodePtr head;
     nodePtr tail;
     nodePtr current;
+    int size;
 };
 #endif
