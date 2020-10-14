@@ -4,7 +4,7 @@
  File Description: Contains array structure. Code based on reference given by
  Dr. Sherine M. Antoun during first week's course material
                                                                   
- Date Last Modified: 10/1/2020
+ Date Last Modified: 10/3/2020
 
 I declare that all material in this assessment task is my work except where there
 is clear acknowledgement or reference to the work of others. I further declare that I

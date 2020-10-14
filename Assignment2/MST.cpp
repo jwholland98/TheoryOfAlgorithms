@@ -5,7 +5,7 @@
  Kruskal's algorithm and outputs shortest path between two cities within the minimum 
  spanning tree                         
                                                                   
- Date Last Modified: 10/1/2020                                  
+ Date Last Modified: 10/14/2020                                  
 
 I declare that all material in this assessment task is my work except where there
 is clear acknowledgement or reference to the work of others. I further declare that I
@@ -14,7 +14,7 @@ website.
 http://www.coloradomesa.edu/student-services/documents
 Submissions that do not include the above academic integrity statements will not be
 considered.
-Student Name: Jesse Holland UID: 700445452 Date: October 3, 2020
+Student Name: Jesse Holland UID: 700445452 Date: October 14, 2020
 *******************************************************************************************/
 
 /*******************************************************************************************
@@ -97,7 +97,7 @@ void Union(Array<subset> &subsets, int x, int y){
 
 //returns Minimum spanning tree of graph represented by an edge list
 //Cide based on code from: https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/
-Array<Edge> Kruskal(Graph graph, bool output){
+Array<Edge> Kruskal(Graph &graph, bool output){
     int V = graph.numVertices;
     Array<Edge> result(V-1);//stores MST
     int e = 0, i = 0, totaldist = 0;

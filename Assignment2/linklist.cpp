@@ -4,7 +4,7 @@
  File Description: Contains Linked List Data Structure. Code based on reference given by
  Dr. Sherine M. Antoun during first week's course material, although modified heavily
                                                                   
- Date Last Modified: 10/1/2020
+ Date Last Modified: 10/14/2020
 
 I declare that all material in this assessment task is my work except where there
 is clear acknowledgement or reference to the work of others. I further declare that I
@@ -13,7 +13,7 @@ website.
 http://www.coloradomesa.edu/student-services/documents
 Submissions that do not include the above academic integrity statements will not be
 considered.
-Student Name: Jesse Holland UID: 700445452 Date: October 3, 2020
+Student Name: Jesse Holland UID: 700445452 Date: October 14, 2020
 *******************************************************************************************/
 
 #include <iostream>
@@ -47,8 +47,16 @@ LinkedList<T>::LinkedList()
 template<class T>
 LinkedList<T>::~LinkedList()//deallocate head and tail
 {
-    delete head;
-    delete tail;
+    nodePtr curr, next;
+    curr = head;
+    next = head->next;
+    while(next!=tail){
+        delete curr;
+        curr = next;
+        next = next->next;
+    }
+    delete curr;
+    delete next;
 }
 
 template<class T>
