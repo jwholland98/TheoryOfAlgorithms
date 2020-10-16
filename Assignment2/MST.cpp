@@ -1,9 +1,13 @@
 /*******************************************************************************************
  Filename: MST.cpp                                  
  Assignment No: 2                                                  
- File Description: Builts minimum spanning tree from input file "distances.txt" fromusing
+ File Description: Builts minimum spanning tree from input file "distances.txt" using
  Kruskal's algorithm and outputs shortest path between two cities within the minimum 
- spanning tree                         
+ spanning tree 
+
+    I talked about possible solutions with both Kimlong Seng and Matt Behnke.
+    Code for Kruskal's algorithm is based on code from:
+        https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/       
                                                                   
  Date Last Modified: 10/14/2020                                  
 
@@ -96,7 +100,7 @@ void Union(Array<subset> &subsets, int x, int y){
 }
 
 //returns Minimum spanning tree of graph represented by an edge list
-//Cide based on code from: https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/
+//Code based on code from: https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/
 Array<Edge> Kruskal(Graph &graph, bool output){
     int V = graph.numVertices;
     Array<Edge> result(V-1);//stores MST
