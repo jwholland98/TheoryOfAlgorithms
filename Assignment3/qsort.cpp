@@ -3,7 +3,24 @@
 
 using namespace std;
 
+void swapem(Array<int*> &index, int &A, int &B){
+    int* tmp = index[A];
+    index[A] = index[B];
+    index[B] = tmp;
+}
+
+void Sort3(Array<int*> &index, int &A, int &B, int &C){
+    if(*index[A] > *index[B])
+        swapem(index, A, B);
+    if(*index[A] > *index[C])
+        swapem(index, A, C);
+    if(*index[B] > *index[C])
+        swapem(index, B, C);
+}
+
 void partition(Array<int*> &index, int left, int right, int &pivot){
+    int middle = (left+right)/2;
+    Sort3(index, left, middle, right);
     int lindex = left;
     int rindex = right+1;
     int pvalue = left;
@@ -11,7 +28,7 @@ void partition(Array<int*> &index, int left, int right, int &pivot){
     while(lindex < rindex){
         //cout << "got here 2" << endl;
         lindex++;
-        while(*index[lindex] < *index[pvalue] && lindex < rindex-1){//seems to break here
+        while(*index[lindex] < *index[pvalue]){
             //cout << "got here 3" << endl;
             lindex++;
         }
@@ -22,16 +39,12 @@ void partition(Array<int*> &index, int left, int right, int &pivot){
         }
         if(lindex < rindex){
             //cout << "got here 5" << endl;
-            int* tmp = index[rindex];
-            index[rindex] = index[lindex];
-            index[lindex] = tmp;
+            swapem(index, rindex, lindex);
         }
     }
     //cout << "got here 6" << endl;
     pivot = rindex;
-    int* tmp = index[rindex];
-    index[rindex] = index[left];
-    index[left] = tmp;
+    swapem(index, rindex, left);
 }
 
 void qsort(Array<int*> &index, int left, int right){

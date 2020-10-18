@@ -36,7 +36,7 @@ int main(int argc, char **argv){
     Array<int*> sorted(stoi(argv[1]));
     srand(time(NULL));
     for(int i=0;i<unsorted.getSize();i++){
-        unsorted[i] = rand() % 10000;
+        unsorted[i] = (rand() % 10000) + 1;
         sorted[i] = &unsorted[i];
     }
 
