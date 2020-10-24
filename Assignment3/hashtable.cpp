@@ -13,7 +13,8 @@ class Hashtable{
     //Array<Array<content>> table;
     int *sizes;
     content ** table;
-    Hashtable(int newSize){
+
+    Hashtable(int newSize){//note: table[0][0] is set to random characters and any attempt to change it breaks the program
         size = newSize;
         //table = Array<LinkedList<content>>(size);  //a size of 33 or up seg faults
         //table = Array<Array<content>>(size);      //a size of 65 or up seg faults
@@ -34,7 +35,7 @@ class Hashtable{
         int R = 31;
         int hash = 0;
         for(int i=0;i<str.length(); i++)
-            hash = (R * hash + int(str[i])) % size;
+            hash = (R * hash + int(str[i])) % (size-1)+1;
         return hash;
     }
 
@@ -63,7 +64,7 @@ class Hashtable{
 
     void newElement(string element){
         int index = hashStr(element);
-        cout << "hash: " << index << endl;
+        //cout << "hash: " << index << endl;
 
         //insert into hashtable
         if(!collision(index))
@@ -74,6 +75,18 @@ class Hashtable{
 
     int getSize(){
         return size;
+    }
+
+    void output(){
+        for(int i=1;i<size;i++){
+            //cout << "i: " << i << endl;
+            for(int j=0;j<sizes[i];j++){
+                //cout << "j: " << j << endl;
+                if(table[i][j].word != ""){
+                    cout << table[i][j].word << " :: count = " << table[i][j].count << endl;
+                }
+            }
+        }
     }
 
   private:
