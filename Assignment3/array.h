@@ -33,6 +33,9 @@ class Array
     // store in index position a value
     void Store(int,T);
 
+    //copy array into new array +1 and add new data
+    void Push(T data);
+
     // retrieve from index position
     T Retrieve(int) const;
 

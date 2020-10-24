@@ -47,6 +47,18 @@ void Array<T>::Store(int index, T value)
 }
 
 template <class T>
+void Array<T>::Push(T data){
+    T *tmp = new T[size+1];
+    for(int i=0;i<size;i++)
+        tmp[i] = collection[i];
+    //cout << "got here" << endl;
+    size++;
+    delete collection;
+    collection = tmp;
+    collection[size-1] = data;
+}
+
+template <class T>
 T Array<T>::Retrieve(int index) const
 {
     if ((index < 0) || (index > size-1))
