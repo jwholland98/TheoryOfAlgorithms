@@ -196,3 +196,10 @@ bool LinkedList<T>::More()
 {
      return (current != 0);
 } 
+
+//unique to hashtable
+template<class T>
+void LinkedList<T>::updateCount()
+{
+    current->prev->data.count++;
+}

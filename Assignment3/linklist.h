@@ -53,6 +53,8 @@ class LinkedList
     
     T DeleteCurrent(); 
 
+    void updateCount();
+
   private:
     struct node;
     typedef node *nodePtr;
