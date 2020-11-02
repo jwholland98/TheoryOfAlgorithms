@@ -41,7 +41,7 @@ LinkedList<T>::LinkedList()
     head->next=tail;
     tail->prev=head;
     head->prev=NULL;
-    tail->next-NULL;
+    tail->next=NULL;
 }
 
 template<class T>
