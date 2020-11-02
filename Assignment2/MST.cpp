@@ -142,7 +142,7 @@ Array<Edge> Kruskal(Graph &graph, bool output){
 //tree structure represented as an edge list
 void shortestPathFromTree(Array<Edge> &tree, string src, string dst){
     LinkedList<Edge> result;//stores resulting path
-    Array<bool> visited(tree.getSize()+1);//stores nodes already visited
+    Array<bool> visited(10000);//stores nodes already visited
     string next;
     int i=0;
     while(next != dst){//from src node, find path to dst
@@ -151,14 +151,14 @@ void shortestPathFromTree(Array<Edge> &tree, string src, string dst){
                 cerr << "City not found" << endl;
                 return;
             }
-            if(tree[i].src.name == src){
+            if(tree[i].src.name == src && visited[tree[i].dst.nodeNum] != true){
                 result.InsertBack(tree[i]);
                 next = tree[i].dst.name;
                 visited[tree[i].src.nodeNum] = true;//set both src and dst of edge to visited
                 visited[tree[i].dst.nodeNum] = true;
                 i=-1;
             }
-            else if(tree[i].dst.name == src){
+            else if(tree[i].dst.name == src && visited[tree[i].src.nodeNum] != true){
                 result.InsertBack(tree[i]);
                 next = tree[i].src.name;
                 visited[tree[i].src.nodeNum] = true;//set both src and dst of edge to visited
@@ -167,7 +167,7 @@ void shortestPathFromTree(Array<Edge> &tree, string src, string dst){
             }
         }
         else{//look for next node until end of path is reached, or dst is found
-            if(i>=tree.getSize()-1){//if end is reached, go down different path
+            if(i>=tree.getSize()){//if end is reached, go down different path
                 Edge tmp = result.PopFromTail();
                 if(tmp.src.name == next)//set next to what it was during that time
                     next = tmp.dst.name;
