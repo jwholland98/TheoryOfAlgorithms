@@ -1,8 +1,27 @@
+/*******************************************************************************************
+ Filename: ass3B.cpp                                  
+ Assignment No: 3                                       
+ File Description: Completes the 3rd step for Assignment 3. Finds the kth pivot from an 
+ array of random integers. Results and possible implementations were discussed with
+ Matthew Behnke and Kimlong Seng.
+                                                                  
+ Date Last Modified: 10/30/2020
+
+I declare that all material in this assessment task is my work except where there
+is clear acknowledgement or reference to the work of others. I further declare that I
+have complied and agreed to the CMU Academic Integrity Policy at the University
+website.
+http://www.coloradomesa.edu/student-services/documents
+Submissions that do not include the above academic integrity statements will not be
+considered.
+Student Name: Jesse Holland UID: 700445452 Date: October 30, 2020
+*******************************************************************************************/
 #include <iostream>
 #include "array.cpp"
 
 using namespace std;
 
+//returns kth pivot of an array
 void kthValue(Array<int> &index, int n, int k){
     int i = 0;
     while(k != i){

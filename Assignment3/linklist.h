@@ -1,10 +1,10 @@
 /*******************************************************************************************
  Filename: linklist.h                                  
- Assignment No: 2                                                  
+ Assignment No: 3
  File Description: Contains Linked List Header info. Code based on reference given by
  Dr. Sherine M. Antoun during first week's course material, although modified heavily
                                                                   
- Date Last Modified: 10/3/2020
+ Date Last Modified: 10/30/2020
 
 I declare that all material in this assessment task is my work except where there
 is clear acknowledgement or reference to the work of others. I further declare that I
@@ -13,7 +13,7 @@ website.
 http://www.coloradomesa.edu/student-services/documents
 Submissions that do not include the above academic integrity statements will not be
 considered.
-Student Name: Jesse Holland UID: 700445452 Date: October 3, 2020
+Student Name: Jesse Holland UID: 700445452 Date: October 30, 2020
 *******************************************************************************************/
 
 #ifndef LINKLIST_H_
