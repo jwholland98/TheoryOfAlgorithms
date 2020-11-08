@@ -41,7 +41,7 @@ class Hashtable{
 
     //deconstructor
     ~Hashtable(){
-        //delete table;
+        
     }
 
     //hash function based on function implemented in:
